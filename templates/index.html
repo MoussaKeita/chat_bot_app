@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    	<title>chat bot</title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0">
+    	<link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+    </head>
+
+    <body>
+
+    	<div class = "container">
+    		<form method="post" action="{{url_for('predict')}}">
+	    			<div class = "contact-box">
+
+	    			<div class="left"></div>
+	    			<div class="right">
+	    				<h2>Assistant BOB</h2>
+	    				<textarea class="field area" placeholder="Ask your question" name="query"></textarea>
+	    				<button class="btn">Ask</button>
+	    			</div>
+
+	    		</div>
+    		</form>
+    		<div class = "contact-box2">
+
+	    			<div class="left2"></div>
+	    			<div class="right2">
+	    				<textarea class="field area2" placeholder="Bob reply" name="query">{{response_text}}</textarea>
+	    			</div>
+
+	    		</div>
+    		<!--<div class="reply" >
+    			<textarea class="damn" placeholder="Bob reply" ></textarea>
+    		</div>-->
+    		<div class="quiz">
+    				<h2>Here are some questions you can ask about Bob</h2>
+    				<ul id ="ask">
+    					<li>what's up</li>
+    					<li>what's your name</li>
+    					<li>Tell me a joke</li>
+    					<li>Do you married</li>
+    					<li>who created you</li>
+    					<li>Do you have kids</li>
+    				</ul>
+    		</div>
+    	</div>
+    </body>
+</html>
+
