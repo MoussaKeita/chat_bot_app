@@ -55,7 +55,7 @@ def predict():
         if i["tag"] == category:  # puis on compare le tag(label) avec la prediction
             reponse = np.random.choice(i["responses"])  # pour enfin afficher la reponse corespondante
 
-    return render_template("index.html",response_text = "{}".format(None))
+    #return render_template("index.html",response_text = "{}".format(None))
     return render_template("index.html", response_text="{}".format(reponse))
 
 
