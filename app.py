@@ -32,8 +32,6 @@ for intent in data["intents"]:  # parcours du data
 def home():
 	return render_template('index.html')
 
-#loading model
-model = load_model('model_chatbot.h5')
 
 label = LabelEncoder()
 
@@ -41,13 +39,16 @@ traning_labels = label.fit_transform(traning_labels)
 
 @app.route('/predict',methods = ["POST"])
 def predict():
+    # loading model
+    model = load_model('model_chatbot.h5')
     max_len = 20
     trunc_type = 'post'
     vocab_size = 10000
     oov_token = "<OOV>"
     saisi_user = request.form['query']
     tokenizer = Tokenizer(num_words=vocab_size, oov_token=oov_token)
-    tokenizer.fit_on_texts(saisi_user)
+    #tokenizer.fit_on_texts(saisi_user)
+    tokenizer.fit_on_texts(training_sentences)
     word_index = tokenizer.word_index
     result = model.predict(pad_sequences(tokenizer.texts_to_sequences([saisi_user]), truncating=trunc_type, maxlen=max_len))
     category = label.inverse_transform([np.argmax(result)])  # inverse_transform on the scaler to get the original unscaled data back.
@@ -55,7 +56,6 @@ def predict():
         if i["tag"] == category:  # puis on compare le tag(label) avec la prediction
             reponse = np.random.choice(i["responses"])  # pour enfin afficher la reponse corespondante
 
-    #return render_template("index.html",response_text = "{}".format(None))
     return render_template("index.html", response_text="{}".format(reponse))
 
 
